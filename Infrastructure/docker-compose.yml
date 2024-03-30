@@ -1,0 +1,39 @@
+version: '1.0'
+
+services:
+  tomcat:
+    image: tomcat:9.0.87-jre21
+    container_name: tomcat
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./tomcat_conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      - ./tomcat_logs:/usr/local/tomcat/logs
+      - ./tomcat_webapps:/usr/local/tomcat/webapps
+
+  db:
+    image: mysql
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: account
+      MYSQL_PASSWORD: account
+      MYSQL_DATABASE: expenses
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql_database:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - 8081:80
