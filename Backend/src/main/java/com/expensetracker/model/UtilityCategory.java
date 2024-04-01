@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class UtilityCategory {
 
-    private int id;
+    private long id;
     private String name;
     private String description;
     private String nameTranslate;
@@ -12,7 +12,14 @@ public class UtilityCategory {
 
     public UtilityCategory() {}
 
-    public UtilityCategory(int id, String name, String description, String nameTranslate, String descriptionTranslate) {
+    public UtilityCategory(String name, String nameTranslate) {
+        this.name = name;
+        this.description = null;
+        this.nameTranslate = nameTranslate;
+        this.descriptionTranslate = null;
+    }
+
+    public UtilityCategory(long id, String name, String description, String nameTranslate, String descriptionTranslate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -20,11 +27,11 @@ public class UtilityCategory {
         this.descriptionTranslate = descriptionTranslate;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
