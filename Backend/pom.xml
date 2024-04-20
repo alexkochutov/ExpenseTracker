@@ -1,11 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.expensetracker</groupId>
-  <artifactId>Backend</artifactId>
-  <packaging>war</packaging>
+  <artifactId>expensetracker</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Backend Maven Webapp</name>
+
+  <packaging>war</packaging>
+  <name>ExpenseTracker Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -38,7 +40,8 @@
     </dependency>
 
   </dependencies>
+
   <build>
-    <finalName>Backend</finalName>
+    <finalName>ROOT</finalName>
   </build>
 </project>
