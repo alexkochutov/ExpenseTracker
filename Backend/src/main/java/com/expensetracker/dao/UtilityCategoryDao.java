@@ -16,6 +16,15 @@ public class UtilityCategoryDao {
             INSERT INTO utility_categories (name, description, name_translate, description_translate)
             VALUES (?, ?, ?, ?)
             """;
+    private static final String QUERY_GET_BY_ID = """
+            SELECT id, name, description, name_translate, description_translate
+            FROM utility_categories
+            WHERE id = ?
+            """;
+    private static final String QUERY_GET_ALL = """
+            SELECT id, name, description, name_translate, description_translate
+            FROM utility_categories
+            """;
     private static final String QUERY_UPDATE = """
             UPDATE utility_categories
             SET name = ?,
@@ -28,15 +37,6 @@ public class UtilityCategoryDao {
             DELETE FROM utility_categories
             WHERE id = ?
             """;
-    private static final String QUERY_GET_BY_ID = """
-            SELECT id, name, description, name_translate, description_translate
-            FROM utility_categories
-            WHERE id = ?
-            """;
-    private static final String QUERY_GET_ALL = """
-            SELECT id, name, description, name_translate, description_translate
-            FROM utility_categories
-            """;
 
     private UtilityCategoryDao() {}
 
@@ -48,7 +48,7 @@ public class UtilityCategoryDao {
         try (
                 Connection connection = ConnectionManager.get();
                 PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SAVE, Statement.RETURN_GENERATED_KEYS)
-                ) {
+        ) {
             preparedStatement.setString(1, category.getName());
             preparedStatement.setString(2, category.getDescription());
             preparedStatement.setString(3, category.getNameTranslate());
@@ -60,6 +60,39 @@ public class UtilityCategoryDao {
                 category.setId(generatedKeys.getLong(1));
             }
             return category;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Optional<UtilityCategory> get(long id) {
+        try (
+                Connection connection = ConnectionManager.get();
+                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_GET_BY_ID)
+        ) {
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            UtilityCategory category = null;
+            if (resultSet.next()) {
+                category = buildCategory(resultSet);
+            }
+            return Optional.ofNullable(category);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<UtilityCategory> getAll() {
+        try (
+                Connection connection = ConnectionManager.get();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(QUERY_GET_ALL)
+        ) {
+            List<UtilityCategory> list = new ArrayList<>();
+            while (resultSet.next()) {
+                list.add(buildCategory(resultSet));
+            }
+            return list;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -88,39 +121,6 @@ public class UtilityCategoryDao {
                 ) {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public Optional<UtilityCategory> get(long id) {
-        try (
-                Connection connection = ConnectionManager.get();
-                PreparedStatement preparedStatement = connection.prepareStatement(QUERY_GET_BY_ID)
-                ) {
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            UtilityCategory category = null;
-            if (resultSet.next()) {
-                category = buildCategory(resultSet);
-            }
-            return Optional.ofNullable(category);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<UtilityCategory> getAll() {
-        try (
-                Connection connection = ConnectionManager.get();
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(QUERY_GET_ALL)
-                ) {
-            List<UtilityCategory> list = new ArrayList<>();
-            while (resultSet.next()) {
-                list.add(buildCategory(resultSet));
-            }
-            return list;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
