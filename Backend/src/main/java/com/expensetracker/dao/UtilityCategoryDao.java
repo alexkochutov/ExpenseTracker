@@ -1,5 +1,6 @@
 package com.expensetracker.dao;
 
+import com.expensetracker.exception.CategoryAlreadyExistsException;
 import com.expensetracker.model.UtilityCategory;
 import com.expensetracker.utils.ConnectionManager;
 
@@ -61,6 +62,8 @@ public class UtilityCategoryDao {
             }
             return category;
         } catch (SQLException e) {
+            if (e.getMessage().contains("Duplicate entry"))
+                throw new CategoryAlreadyExistsException(e.getMessage());
             throw new RuntimeException(e);
         }
     }
