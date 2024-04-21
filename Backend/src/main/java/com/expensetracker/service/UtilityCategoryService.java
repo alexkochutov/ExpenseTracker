@@ -1,6 +1,7 @@
 package com.expensetracker.service;
 
 import com.expensetracker.dao.UtilityCategoryDao;
+import com.expensetracker.exception.CategoryAlreadyExistsException;
 import com.expensetracker.model.UtilityCategory;
 
 import java.util.List;
@@ -9,6 +10,19 @@ import java.util.Optional;
 public class UtilityCategoryService {
 
     private static final UtilityCategoryDao UC_DAO = UtilityCategoryDao.getInstance();
+
+    public String saveCategory(UtilityCategory category) {
+        try {
+            UtilityCategory result = UC_DAO.save(category);
+            return "{ \"result\" : \"Category '"
+                    + result.getName()
+                    + "' has been successfully saved with id = "
+                    + result.getId() + "\" }";
+        } catch (CategoryAlreadyExistsException e) {
+            return "{ \"errorMessage\" : \"Category '"
+                    + category.getName() + "' is already exist\" }";
+        }
+    }
 
     public String getCategoryById(long id) {
         Optional<UtilityCategory> category = UC_DAO.get(id);
