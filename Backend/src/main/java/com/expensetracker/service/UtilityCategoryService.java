@@ -16,8 +16,8 @@ public class UtilityCategoryService {
             UtilityCategory result = UC_DAO.save(category);
             return "{ \"result\" : \"Category '"
                     + result.getName()
-                    + "' has been successfully saved with id = "
-                    + result.getId() + "\" }";
+                    + "' has been successfully saved with id '"
+                    + result.getId() + "'\" }";
         } catch (CategoryAlreadyExistsException e) {
             return "{ \"errorMessage\" : \"Category '"
                     + category.getName() + "' is already exist\" }";
@@ -48,5 +48,22 @@ public class UtilityCategoryService {
         }
         result.append("]}");
         return result.toString();
+    }
+
+    public String updateCategory(UtilityCategory category) {
+        Optional<UtilityCategory> result = UC_DAO.get(category.getId());
+        if (result.isPresent()) {
+            UC_DAO.update(category);
+            return "{ \"result\" : \"Category '"
+                    + category.getName()
+                    + "' with id "
+                    + category.getId()
+                    + " has been successfully updated\" }";
+        } else {
+            return "{ \"errorMessage\" : \"Category with id '"
+                    + category.getId()
+                    + "' is not found\" }";
+        }
+
     }
 }
