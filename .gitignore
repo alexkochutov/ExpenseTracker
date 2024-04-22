@@ -1,6 +1,7 @@
 .idea
 target
 Data
+Infrastructure
 postgres_admin_data
 postgres_db_data
 Reference Data
