@@ -77,6 +77,7 @@ public class UtilityCategoryServlet extends HttpServlet {
 
     @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         request.setCharacterEncoding("utf-8");
         response.setHeader("Content-type", "application/json; charset=utf-8");
 
@@ -102,6 +103,35 @@ public class UtilityCategoryServlet extends HttpServlet {
                         response.setStatus(200);
                 }
             }
+        }
+        response.getWriter().write(payload);
+    }
+
+    @Override
+    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        request.setCharacterEncoding("utf-8");
+        response.setHeader("Content-type", "application/json; charset=utf-8");
+
+        String payload;
+        String pathInfo = request.getPathInfo();
+
+        String tempIdStr = pathInfo.startsWith("/") ? pathInfo.replaceFirst("/", "") : pathInfo;
+        try {
+            long id = Long.decode(tempIdStr);
+            if (id > 0 && id < Long.MAX_VALUE) {
+                payload = UC_SERVICE.deleteCategory(id);
+                if (payload.contains("errorMessage"))
+                    response.setStatus(400);
+                if (payload.contains("result"))
+                    response.setStatus(200);
+            } else {
+                response.setStatus(400);
+                payload = WRONG_ID_VALUE;
+            }
+        } catch (NumberFormatException e) {
+            response.setStatus(400);
+            payload = UNSUPPORTED_ID_FORMAT;
         }
         response.getWriter().write(payload);
     }
