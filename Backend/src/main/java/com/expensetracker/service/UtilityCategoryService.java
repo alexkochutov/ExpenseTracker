@@ -64,6 +64,27 @@ public class UtilityCategoryService {
                     + category.getId()
                     + "' is not found\" }";
         }
+    }
 
+    public String deleteCategory(long id) {
+        Optional<UtilityCategory> result = UC_DAO.get(id);
+        if (result.isPresent()) {
+            if (UC_DAO.delete(id)) {
+                return "{ \"result\" : \"Category '"
+                        + result.get().getName()
+                        + "' with id "
+                        + result.get().getId()
+                        + " has been successfully deleted\" }";
+            } else {
+                return "{ \"errorMessage\" : \"Category '"
+                        + result.get().getName()
+                        + "' with id "
+                        + result.get().getId()
+                        + " has not been deleted\" }";
+            }
+        } else {
+            return "{ \"errorMessage\" : \"Category with id '"
+                    + id + "' is not found\" }";
+        }
     }
 }
