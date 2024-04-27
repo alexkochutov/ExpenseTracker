@@ -1,0 +1,124 @@
+.category_size {
+    height: 100px;
+    width: 1000px;
+}
+
+.category_spacing {
+    margin: 15px auto;
+}
+
+.category_flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.category__header_size {
+    height: 100px;
+    width: 200px;
+}
+
+.category__header_spacing {
+    padding: 0 35px;
+}
+
+.category__header_background {
+    background-color: #16253D;
+}
+
+.category__header_flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.category__header_font-style {
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.category__container_size {
+    height: 100px;
+    width: 800px;
+}
+
+.category__container_spacing {
+    padding: 5px 0px;
+}
+
+.category__container_background {
+    background-color: #fff;
+}
+
+.category__container_border {
+    border: #16253D 1px solid;
+}
+
+.category__container_flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: space-between;
+}
+
+.category__name-text_font-size,
+.category__name-input_font-size,
+.category__description-text_font-size,
+.category__description-input_font-size,
+.category__button_font-size {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.category__name_spacing,
+.category__description_spacing,
+.category__button_spacing {
+    margin: 0;
+    padding: 0 10px;
+}
+
+.category__name-hint_font-size,
+.category__name-alert_font-size,
+.category__description-hint_font-size {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.category__name-input_size,
+.category__description-input_size {
+    height: 30px;
+    width: 300px;
+}
+
+.category__name-input_border-bottom,
+.category__description-input_border-bottom {
+    outline: none;
+    border: none;
+    border-bottom: #16253D 1px solid;
+}
+
+.category__button_flex-align {
+    align-self: center;
+}
+
+.category__button_size {
+    height: 30px;
+    width: 140px;
+}
+
+.category__button_background {
+    background-color: #16253D;
+}
+
+.category__button_border-none {
+    outline: none;
+    border: none;
+}
+
+.category__button_font-color {
+    color: #fff;
+}
+
+.category__name_alert-hidden {
+    visibility: hidden;
+}
