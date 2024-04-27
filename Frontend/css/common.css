@@ -83,7 +83,6 @@
     text-align: center;
 }
 
-.main__size {
-    width: auto;
-    height: 100%;
+.main_flex-grow {
+    flex: 1;
 }
