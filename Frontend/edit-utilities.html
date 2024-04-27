@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/edit-utilities.css">
     <title>ExpenseTracker - Edit Utilities</title>
 </head>
 <body>
@@ -105,9 +106,49 @@
                 </div>
             </div>
         </aside>
-        <main class="main main_size">
 
+        <main class="main main_flex-grow">
+            
+            <div class="category category_size category_spacing category_flex">
+                <div class="category__header category__header_size category__header_spacing category__header_background category__header_flex-row">
+                    <p class="category__header_font-style">Create new category</p>
+                </div>
+                <div class="category__container category__container_size category__container_spacing category__container_background category__container_border category__container_flex-row">
+                    <div class="category__name category__name_spacing">
+                        <div class="category__name-text category__name-text_font-size">
+                            <p>Name</p>
+                        </div>
+                        <div class="category__name-hint category__name-hint_font-size">
+                            <p>Required field. Max length 50 symbols. </p>
+                        </div>
+                        <div class="category__name-input">
+                            <input type="text" name="categoryNameInput" id="categoryNameInput" class="category__name-input_size category__name-input_border-bottom category__name-input_font-size">
+                        </div>
+                        <div name="categoryNameAlert" id="categoryNameAlert" class="category__name-alert category__name-alert_font-size category__name_alert-hidden">
+                            <p>This field MUST contain at least 1 symbol.</p>
+                        </div>
+                    </div>
+                    <div class="category__description category__description_spacing">
+                        <div class="category__description-text category__description-text_font-size">
+                            <p>Description</p>
+                        </div>
+                        <div class="category__description-hint category__description-hint_font-size">
+                            <p>Not required but highly desirable. Max length 150 symbols.</p>
+                        </div>
+                        <div class="category__description-input category__description-input_size">
+                            <input type="text" name="categoryDescriptionInput" id="categoryDescriptionInput" class="category__description-input_size category__description-input_border-bottom category__description-input_font-size">
+                        </div>
+                    </div>
+                    <div class="category__button category__button_spacing category__button_flex-align">
+                        <button name="createCategoryBtn" id="createCategoryBtn" class="category__button_size category__button_background category__button_border-none category__button_font-size category__button_font-color">Create</button>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
+    <div class="status-screen">
+        
+    </div>
+    <script src="./js/edit-utilities.js"></script>
 </body>
 </html>
