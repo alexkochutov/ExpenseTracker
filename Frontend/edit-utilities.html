@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/edit-utilities.css">
+    <link rel="stylesheet" href="./css/status-modal.css">
     <title>ExpenseTracker - Edit Utilities</title>
 </head>
 <body>
@@ -144,10 +145,32 @@
                     </div>
                 </div>
             </div>
+
+            <div id="categoryList" class="category-list">
+                <div class="category-list__header">Already existed categories</div>
+
+            </div>
         </main>
     </div>
-    <div class="status-screen">
-        
+    <div id="modalWindow" class="status-modal status-modal_modifier status-modal_hidden">
+        <div class="status-window status-window_inner">
+            <div class="status-window__header status-window__header_modifier">
+                <div class="status-window__header-text status-window__header-text_modifier">
+                    <p>Create new category</p>
+                </div>
+                <div id="modalCloseBtn" class="status-window__close-button status-window__close-button_modifier">
+                    <p>X</p>
+                </div>
+            </div>
+            <div class="status-window__content status-window__content_modifier">
+                <div class="status-window__icon">
+                    <img id="modalIcon" src="./img/loading.gif" alt="loading" class="status-window__icon_size">
+                </div>
+                <div id="modalMessage" class="status-window__message status-window__message_modifier">
+                    Sending request
+                </div>
+            </div>
+        </div>
     </div>
     <script src="./js/edit-utilities.js"></script>
 </body>
