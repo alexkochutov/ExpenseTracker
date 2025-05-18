@@ -1,57 +1,65 @@
 from http.server import BaseHTTPRequestHandler
-from api import income_sources
 import json
+from . import income_sources
 
 class RESTController(BaseHTTPRequestHandler):
 
-    def _set_headers(self, status=200):
+    def _parse_path(self):
+        return self.path.strip('/').split('/')
+    
+
+    def _get_data(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        return json.loads(post_data)
+
+
+    def _send_response(self, status, response):
         self.send_response(status)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
+        self.wfile.write(json.dumps(response).encode())
+
 
     def do_GET(self):
-        if self.path == '/income-sources':
-            status, respose = income_sources.get_sources()
-        else:
-            status, respose = 404, {'error': 'Not found'}
-        self._set_headers(status)
-        self.wfile.write(json.dumps(respose).encode())
+        segments = self._parse_path()
+        match segments:
+            case ['income-sources']:
+                status, response = income_sources.get_sources()
+            case ['income-sources', id] if id.isdigit():
+                status, response = income_sources.get_source_by_id(id)
+            case _:
+                status, response = 404, {'error': 'Not found'}
+        self._send_response(status, response)
 
     
     def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
-        data = json.loads(post_data)
+        segments = self._parse_path()
+        data = self._get_data()
+        match segments:
+            case ['income-sources']:
+                status, response = income_sources.add_source(data)
+            case _:
+                status, response = 404, {'error': 'Not found'}
+        self._send_response(status, response)
 
-        if self.path == '/income-sources':
-            status, response = income_sources.add_source(data)
-        else:
-            status, response = 404, {'error': 'Not found'}
-        self._set_headers(status)
-        self.wfile.write(json.dumps(response).encode())
 
     def do_PUT(self):
-        segments = self.path.strip('/').split('/')
-        item_id = int(segments[1])
-        content_length = int(self.headers['Content-Length'])
-        data = self.rfile.read(content_length)
+        segments = self._parse_path()
+        data = self._get_data()
+        match segments:
+            case ['income-sources', id] if id.isdigit():
+                status, response = income_sources.update_source(id, data)
+            case _:
+                status, response = 404, {'error': 'Not found'}
+        self._send_response(status, response)
 
-        if len(segments) == 2 and segments[0] == 'income-sources':
-            status, response = income_sources.update_source(item_id, data)
-        else:
-            status, response = 404, {'error': 'Not found'}
-
-        self._set_headers(status)
-        self.wfile.write(json.dumps(response).encode())
 
     def do_DELETE(self):
-        segments = self.path.strip('/').split('/')
-        item_id = int(segments[1])
-
-        if len(segments) == 2 and segments[0] == 'income-sources':
-            status, response = income_sources.delete_source(item_id)
-        else:
-            status, response = 404, {'error': 'Not found'}
-
-        self._set_headers(status)
-        self.wfile.write(json.dumps(response).encode())
+        segments = self._parse_path()
+        match segments:
+            case ['income-sources', id] if id.isdigit():
+                status, response = income_sources.delete_source(id)
+            case _:
+                status, response = 404, {'error': 'Not found'}
+        self._send_response(status, response)
