@@ -1,6 +1,6 @@
 from http.server import BaseHTTPRequestHandler
 import json
-from . import income_sources
+import api.income_sources as income_sources
 
 class RESTController(BaseHTTPRequestHandler):
 
@@ -18,7 +18,8 @@ class RESTController(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(json.dumps(response).encode())
+        if response is not None:
+            self.wfile.write(json.dumps(response).encode())
 
 
     def do_GET(self):
