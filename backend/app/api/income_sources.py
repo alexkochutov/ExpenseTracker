@@ -1,6 +1,7 @@
 from utils.serializers import serialize_pg_result
 from db.db import get_connection
 
+
 def get_sources():
     with get_connection() as conn:
         with conn.cursor() as cur:
@@ -12,6 +13,7 @@ def get_sources():
             )
             result = serialize_pg_result(cur.fetchall())
     return 200, result
+
 
 def get_source_by_id(id):
     status, response = 404, {'error': 'Not found'}
@@ -29,6 +31,7 @@ def get_source_by_id(id):
     if result is not None:
         status, response = 200, result
     return status, response
+
 
 def add_source(data):
     with get_connection() as conn:
@@ -48,6 +51,7 @@ def add_source(data):
         return 201, data
     else:
         return 200, {'data': 'Already exists'}
+
 
 def update_source(id, data):
     status, response = 404, {'error': 'Not found'}
@@ -73,6 +77,7 @@ def update_source(id, data):
     if updated is not None:
         status, response = 200, updated
     return status, response
+
 
 def delete_source(item_id):
     status, response = 404, {'error': 'Not found'}
