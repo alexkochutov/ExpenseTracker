@@ -2,7 +2,9 @@ from http.server import BaseHTTPRequestHandler
 import json
 import api.income_sources as income_sources
 
+
 class RESTController(BaseHTTPRequestHandler):
+
 
     def _parse_path(self):
         return self.path.strip('/').split('/')
