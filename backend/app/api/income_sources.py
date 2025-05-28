@@ -43,7 +43,7 @@ def add_source(data):
                 ON CONFLICT (id) DO NOTHING
                 RETURNING id, name, currency, type, start_date, end_date, description;
                 """, 
-                (data['name'], data['currency'], data['type'], data['startDate'], data['endDate'], data['description'])
+                (data['name'], data['currency'], data['type'], data['start_date'], data['end_date'], data['description'])
             )
             conn.commit()
             data = serialize_pg_result(cur.fetchone())
@@ -71,7 +71,7 @@ def update_source(id, data):
                 WHERE id = %s
                 RETURNING id, name, currency, type, start_date, end_date, description;
                 """,
-                (data['name'], data['currency'], data['type'], data['startDate'], data['endDate'], data['description'], id)
+                (data['name'], data['currency'], data['type'], data['start_date'], data['end_date'], data['description'], id)
             )
             conn.commit()
             updated = serialize_pg_result(cur.fetchone())
