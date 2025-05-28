@@ -12,16 +12,20 @@ The **'/income-sources'** endpoint is used to create, update, and delete income 
       "id": 1,
       "name": "Company #1",
       "currency": "USD",
-      "description": "Monthly payment",
-      "createdAt": "2025-03-24T12:00:00Z"
+      "type": "Monthly payment",
+      "start_date": "2024-06-01",
+      "end_date": null,
+      "description": "Simple description string"
     },
     {
       "id": 2,
       "name": "Customer #1",
       "currency": "USDT",
-      "description": "One-time payment",
-      "createdAt": "2025-03-24T13:00:00Z"
-      }
+      "type": "Onetime payment",
+      "start_date": "2025-01-10",
+      "end_date": "2025-01-20",
+      "description": "One time corporate system support contract"
+    }
   ]
 ```
 - Status:
@@ -37,9 +41,11 @@ The **'/income-sources'** endpoint is used to create, update, and delete income 
   {
     "id": 1,
     "name": "Company #1",
-    "currency": "USDT",
-    "description": "Monthly payment",
-    "createdAt": "2025-03-24T12:00:00Z"
+    "currency": "USD",
+    "type": "Monthly payment",
+    "start_date": "2024-06-01",
+    "end_date": null,
+    "description": "Simple description string"
   }
 ```
 - Status:
@@ -54,18 +60,23 @@ The **'/income-sources'** endpoint is used to create, update, and delete income 
 ```JSON
   {
     "name": "Company #3",
-    "currency": "EUR",
-    "description": "Monthly payment"
+    "currency": "USDT",
+    "type": "Onetime payment",
+    "start_date": "2025-01-10",
+    "end_date": "2025-01-20",
+    "description": "One time corporate system support contract"
   }
 ```
 - Response:
 ```JSON
   {
-    "id": 1,
-    "name": "Company #1",
+    "id": 3,
+    "name": "Company #3",
     "currency": "USDT",
-    "description": "Monthly payment",
-    "createdAt": "2025-03-24T12:00:00Z"
+    "type": "Onetime payment",
+    "start_date": "2025-01-10",
+    "end_date": "2025-01-20",
+    "description": "One time corporate system support contract"
   }
 ```
   - Status:
@@ -79,19 +90,24 @@ The **'/income-sources'** endpoint is used to create, update, and delete income 
 - Request
 ```JSON
   {
-    "name": "New Company name",
-    "currency": "EUR",
-    "description": "Monthly payment"
+    "name": "New Company #1",
+    "currency": "USD",
+    "type": "Onetime payment",
+    "start_date": "2025-05-01",
+    "end_date": "2025-05-10",
+    "description": "new description string"
   }
 ```
 - Response:
 ```JSON
   {
     "id": 1,
-    "name": "New Company name",
-    "currency": "EUR",
-    "description": "Monthly payment",
-    "createdAt": "2025-03-24T12:00:00Z"
+    "name": "New Company #1",
+    "currency": "USD",
+    "type": "Onetime payment",
+    "start_date": "2025-05-01",
+    "end_date": "2025-05-10",
+    "description": "new description string"
   }
 ```
 - Status:

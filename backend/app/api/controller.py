@@ -19,6 +19,7 @@ class RESTController(BaseHTTPRequestHandler):
     def _send_response(self, status, response):
         self.send_response(status)
         self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         if response is not None:
             self.wfile.write(json.dumps(response).encode())
