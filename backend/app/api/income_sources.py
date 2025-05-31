@@ -7,7 +7,7 @@ def get_sources():
         with conn.cursor() as cur:
             cur.execute(
                 """
-                SELECT id, name, currency, description, created_at 
+                SELECT id, name, currency, type, start_date, end_date, description
                 FROM public.income_source;
                 """
             )
@@ -21,7 +21,7 @@ def get_source_by_id(id):
         with conn.cursor() as cur:
             cur.execute(
                 """
-                SELECT id, name, currency, description, created_at 
+                SELECT id, name, currency, type, start_date, end_date, description
                 FROM public.income_source 
                 WHERE id = %s;
                 """, 
@@ -38,12 +38,12 @@ def add_source(data):
         with conn.cursor() as cur:
             cur.execute(
                 """
-                INSERT INTO public.income_source (name, currency, description, created_at) 
-                VALUES (%s, %s, %s, %s) 
+                INSERT INTO public.income_source (name, currency, type, start_date, end_date, description, created_at) 
+                VALUES (%s, %s, %s, %s, %s, %s, now()) 
                 ON CONFLICT (id) DO NOTHING
-                RETURNING *;
+                RETURNING id, name, currency, type, start_date, end_date, description;
                 """, 
-                (data['name'], data['currency'], data['description'], data['createdAt'])
+                (data['name'], data['currency'], data['type'], data['start_date'], data['end_date'], data['description'])
             )
             conn.commit()
             data = serialize_pg_result(cur.fetchone())
@@ -63,13 +63,15 @@ def update_source(id, data):
                 UPDATE public.income_source 
                 SET 
                     name = %s, 
-                    currency = %s, 
-                    description = %s, 
-                    created_at = %s 
+                    currency = %s,
+                    type = %s,
+                    start_date = %s,
+                    end_date = %s,
+                    description = %s
                 WHERE id = %s
-                RETURNING *;
+                RETURNING id, name, currency, type, start_date, end_date, description;
                 """,
-                (data['name'], data['currency'], data['description'], data['createdAt'], id)
+                (data['name'], data['currency'], data['type'], data['start_date'], data['end_date'], data['description'], id)
             )
             conn.commit()
             updated = serialize_pg_result(cur.fetchone())

@@ -1,0 +1,199 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/index.css">
+        <title>Income sources</title>
+    </head>
+
+    <body>
+        <div class="content">
+            <aside class="menu">
+                <header class="menu__header">
+                    <a href="index.html" class="menu__title">ExpenseTracker</a>
+                </header>
+                <nav class="menu__content">
+                    <section class="menu__section">
+                        <h2 class="menu__section-header">DashBoards</h2>
+                        <ul class="menu__section-list">
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link">
+                                    <img src="img/monitoring.png" alt="Main page icon" class="menu__icon"></img>
+                                    <span class="menu__text">Main Page</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="menu__section">
+                        <h2 class="menu__section-header">Incomes and Expenses</h2>
+                        <ul class="menu__section-list">
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link">
+                                    <img src="img/income.png" alt="Income icon" class="menu__icon"></img>
+                                    <span class="menu__text">Incomes</span>
+                                </a>
+                            </li>
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link">
+                                    <img src="img/counted.png" alt="Counted expenses icon" class="menu__icon"></img>
+                                    <span class="menu__text">Counted expenses</span>
+                                </a>
+                            </li>
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link">
+                                    <img src="img/periodic.png" alt="Periodic expenses icon" class="menu__icon"></img>
+                                    <span class="menu__text">Periodic expenses</span>
+                                </a>
+                            </li>
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link">
+                                    <img src="img/everyday.png" alt="Everyday expenses icon" class="menu__icon"></img>
+                                    <span class="menu__text">Everyday expenses</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="menu__section">
+                        <h2 class="menu__section-header">DB Schema</h2>
+                        <ul class="menu__section-list">
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link menu__link--active">
+                                    <img src="img/incomes.png" alt="Income sources icon" class="menu__icon"></img>
+                                    <span class="menu__text">Income sources</span>
+                                </a>
+                            </li>
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link">
+                                    <img src="img/addresses.png" alt="Addresses icon" class="menu__icon"></img>
+                                    <span class="menu__text">Addresses</span>
+                                </a>
+                            </li>
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link">
+                                    <img src="img/counters.png" alt="Counters icon" class="menu__icon"></img>
+                                    <span class="menu__text">Counters</span>
+                                </a>
+                            </li>
+                            <li class="menu__section-item">
+                                <a href="" class="menu__link">
+                                    <img src="img/categories.png" alt="Categories icon" class="menu__icon"></img>
+                                    <span class="menu__text">Categories</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </nav>
+                <footer class="menu__footer">
+                    <div class="menu__author">
+                        <span>Developed by Aleksandr Kochutov</span>
+                    </div>
+                    <div class="menu__copyright">
+                        <span>© 2024</span>
+                    </div>
+                </footer>
+            </aside>
+
+            <main class="main">
+                <header class="main__header">
+                    <h1 class="main__title">DB Schema : Income sources</h1>
+                </header>
+                <div class="main__content">
+                    <section class="main__new-item">
+                        <h2 class="main__section-header">Create new Income source</h2>
+                        <div class="main__form">
+                            <form class="form income-source-form" method="get" action="">
+                                <div class="form__row">
+                                    <div class="form__element form__element-name">
+                                        <label for="name" class="form__element-label">Name</label>
+                                        <input type="text" name="name" id="name" class="form__element-input" required />
+                                        <span class="form__element-hint" id="name-hint">Requered field</span>
+                                    </div>
+                                    <div class="form__element form__element-currency">
+                                        <label for="currency" class="form__element-label">Currency</label>
+                                        <input type="text" name="currency" id="currency" class="form__element-input" required />
+                                        <span class="form__element-hint" id="currency-hint">Requered field</span>
+                                    </div>
+                                    <div class="form__element form__element-type">
+                                        <label for="type" class="form__element-label">Type</label>
+                                        <select name="type" id="type" class="form__element-select" required>
+                                            <option value="Monthly payment">Monthly payment</option>
+                                            <option value="Onetime payment">Onetime payment</option>
+                                        </select>
+                                        <span class="form__element-hint" id="type-hint">Requered field</span>
+                                    </div>
+                                    <div class="form__element form__element-start">
+                                        <label for="start_date" class="form__element-label">Start date</label>
+                                        <input type="text" name="start_date" id="start_date" class="form__element-input" placeholder="YYYY-MM-DD" required />
+                                        <span class="form__element-hint" id="start_date-hint">Requered field</span>
+                                    </div>
+                                    <div class="form__element form__element-end">
+                                        <label for="end_date" class="form__element-label">End date</label>
+                                        <input type="text" name="end_date" id="end_date" class="form__element-input" placeholder="YYYY-MM-DD" />
+                                        <span class="form__element-hint" id="end_date-hint">Not requered field</span>
+                                    </div>
+                                </div>
+                                <div class="form__row">
+                                    <div class="form__element form__element-description">
+                                        <label for="description" class="form__element-label">Description</label>
+                                        <input type="text" name="description" id="description" class="form__element-input" />
+                                        <span class="form__element-hint" id="description-hint">Not requered field</span>
+                                    </div>
+                                </div>
+                                <div class="form__row form__row--centered">
+                                    <div class="form__element">
+                                        <button class="form__button" id="submit_button">
+                                            <img src="img/save.png" alt="Create new icon" class="form__button-icon">
+                                            <span class="form__button-text">Create new</span>
+                                        </button>
+                                    </div>
+                                    <div class="form__element">
+                                        <button class="form__button" id="reset_button">
+                                            <img src="img/clear.png" alt="Clear form icon" class="form__button-icon">
+                                            <span class="form__button-text">Clear form</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <section class="main__list">
+                        <h2 class="main__section-header">Existed Income sources</h2>
+                        <div class="loader_container">
+                            <div class="loader_image">
+                                <img src="img/loading.gif">
+                            </div>
+                            <div class="loader_text">
+                                <p class="loader_text_holder"></p>
+                            </div>
+                        </div>
+                        <div class="error_container">
+                            <div class="error_text">
+                                <p class="error_text_holder"></p>
+                            </div>
+                        </div>
+                        <div class="list_container">
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+        <div class="modal--hidden" id="modal">
+            <div class="modal__background"></div>
+            <div class="modal__window">
+                <div class="modal__window-container">
+                    <div class="modal__window-header">
+                        <span class="modal__window-title" id="window_title">Create new Income source</span>
+                    </div>
+                    <div class="modal__window-icon">
+                        <img src="img/ok_96.png" alt="Window icon" id="window_icon">
+                    </div>
+                    <div class="modal__window-message">
+                        <span class="modal__window-text" id="window_text">Created Successfully</span>
+                    </div>
+                    <div class="modal__window-button">
+                        <button id="window_button">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/income-sources.js"></script>
+    </body>
+</html>

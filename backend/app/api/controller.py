@@ -19,6 +19,7 @@ class RESTController(BaseHTTPRequestHandler):
     def _send_response(self, status, response):
         self.send_response(status)
         self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         if response is not None:
             self.wfile.write(json.dumps(response).encode())
@@ -66,3 +67,11 @@ class RESTController(BaseHTTPRequestHandler):
             case _:
                 status, response = 404, {'error': 'Not found'}
         self._send_response(status, response)
+
+
+    def do_OPTIONS(self):
+        self.send_response(200, "ok")
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
