@@ -67,3 +67,11 @@ class RESTController(BaseHTTPRequestHandler):
             case _:
                 status, response = 404, {'error': 'Not found'}
         self._send_response(status, response)
+
+
+    def do_OPTIONS(self):
+        self.send_response(200, "ok")
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
